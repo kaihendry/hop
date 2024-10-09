@@ -1,0 +1,13 @@
+name: Pressure Test with Kong
+on:
+  push:
+jobs:
+  pressure-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: go install github.com/rakyll/hey@latest
+      - run: cd openresty-kong-slo && docker compose up --wait --detach --quiet-pull
+      - run: "~/go/bin/hey http://localhost:8888"
+      - run: docker compose logs
+        if: ${{ always() }}

@@ -1,0 +1,20 @@
+services:
+  openresty:
+    image: openresty/openresty
+    volumes:
+      - ./nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf:ro
+    ports:
+      - "8888:8888"
+
+  slo:
+    image: hendry/slo
+
+  kong:
+    image: kong:latest
+    environment:
+      KONG_DATABASE: 'off'
+      KONG_DECLARATIVE_CONFIG: /kong/kong.yml
+    volumes:
+      - ./kong.yml:/kong/kong.yml
+    ports:
+      - '8000:8000'  # Proxy Port

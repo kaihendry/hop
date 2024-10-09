@@ -1,0 +1,10 @@
+services:
+  openresty:
+    image: openresty/openresty
+    volumes:
+      - ./nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf:ro
+    ports:
+      - "8888:8888"
+
+  slo:
+    image: hendry/slo
