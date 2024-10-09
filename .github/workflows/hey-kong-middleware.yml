@@ -9,4 +9,6 @@ jobs:
       - run: go install github.com/rakyll/hey@latest
       - run: cd openresty-kong-slo && docker compose up --wait --detach --quiet-pull
       - run: "~/go/bin/hey -n 1000 http://localhost:8888"
+      - run: "~/go/bin/hey -n 1000 http://localhost:8888"
+      - run: "~/go/bin/hey -n 1000 http://localhost:8888"
       - run: curl -i http://localhost:8888

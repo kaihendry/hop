@@ -2,11 +2,13 @@ name: Pressure Test without Kong
 on:
   push:
 jobs:
-  pressure-test:
+  pressure-test-no-kong:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - run: go install github.com/rakyll/hey@latest
       - run: cd openresty-slo && docker compose up --wait --detach --quiet-pull
+      - run: "~/go/bin/hey -n 1000 http://localhost:8888"
+      - run: "~/go/bin/hey -n 1000 http://localhost:8888"
       - run: "~/go/bin/hey -n 1000 http://localhost:8888"
       - run: curl -i http://localhost:8888
