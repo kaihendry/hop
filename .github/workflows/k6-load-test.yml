@@ -1,0 +1,18 @@
+name: k6 Load Test
+
+on:
+  push:
+
+jobs:
+  run-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - run: cd openresty-slo && docker compose up --wait --detach --quiet-pull
+      - name: Setup K6
+        uses: grafana/setup-k6-action@v1
+      - name: Run local k6 test
+        uses: grafana/run-k6-action@v1
+        with:
+          path: load-test.js
