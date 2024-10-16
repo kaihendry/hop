@@ -7,6 +7,6 @@ build-and-test:
     - apk add --no-cache docker-compose curl go
   script:
     - go install github.com/rakyll/hey@latest
-    - cd openresty-slo && docker-compose up --no-deps --detach --wait
-    - curl -i http://localhost:8888
+    - cd openresty-slo && docker-compose up --detach --wait --quiet-pull
+    - until curl -is http://localhost:8888 > /dev/null; do echo "Waiting for service..."; sleep 5; done
     - ~/go/bin/hey http://localhost:8888
