@@ -1,0 +1,6 @@
+assume-role-example:
+  image:
+    name: amazon/aws-cli:latest
+    entrypoint: [""]
+  script:
+      - aws sts get-caller-identity
