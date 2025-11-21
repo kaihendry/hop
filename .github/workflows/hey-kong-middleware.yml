@@ -5,7 +5,7 @@ jobs:
   pressure-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - run: go install github.com/rakyll/hey@latest
       - run: cd openresty-kong-slo && docker compose up --wait --detach --quiet-pull
       - run: "~/go/bin/hey -n 1000 http://localhost:8888"
